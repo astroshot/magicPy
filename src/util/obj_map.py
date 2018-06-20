@@ -1,3 +1,6 @@
+# coding=utf-8
+
+
 class ObjectDict(dict):
     """ObjectDict allows you to get key using `obj.key`
 
