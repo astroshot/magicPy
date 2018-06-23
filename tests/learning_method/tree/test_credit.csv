@@ -1,0 +1,16 @@
+Age,Job,House,Credit,Classification
+Young,No,No,Normal,No
+Young,No,No,Good,No
+Young,Yes,No,Good,Yes
+Young,Yes,Yes,Normal,Yes
+Young,No,No,Normal,No
+Medium,No,No,Normal,No
+Medium,No,No,Good,No
+Medium,Yes,Yes,Good,Yes
+Medium,No,Yes,Very Good,Yes
+Medium,No,Yes,Very Good,Yes
+Old,No,Yes,Very Good,Yes
+Old,No,Yes,Good,Yes
+Old,Yes,No,Good,Yes
+Old,Yes,No,Very Good,Yes
+Old,No,No,Normal,No
