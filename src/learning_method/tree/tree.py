@@ -5,7 +5,7 @@ from collections import defaultdict
 from sortedmap import sortedmap
 
 from src.learning_method.tree.exceptions import DataError
-from src.util.define import MIN_FLOAT
+from src.util.define import MIN_FLOAT, EPS
 import src.util.df as df
 
 
@@ -35,7 +35,7 @@ def calc_entropy(result):
     """
     entropy = 0.0
     for value in result.values():
-        if math.fabs(value) < 1E-7:
+        if math.fabs(value) < EPS:
             entropy += 0.0
         else:
             entropy += -value * math.log2(value)
