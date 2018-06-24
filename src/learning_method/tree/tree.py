@@ -2,7 +2,6 @@
 
 import math
 from collections import defaultdict
-from sortedmap import sortedmap
 
 from src.learning_method.tree.exceptions import DataError
 from src.util.define import MIN_FLOAT, EPS
@@ -116,7 +115,7 @@ class TreeNode(object):
     Each node has two branches, one is yes, the other is no.
     """
 
-    def __init__(self, feature, label=None, root=None, childs=None):
+    def __init__(self, feature=None, label=None, root=None, childs=None):
         self.feature = feature
         self.label = label
         self.root = root  # father node
@@ -174,12 +173,12 @@ class DecisionTree(object):
 
         if len(res) == 1:
             labels = list(res.keys())
-            node = TreeNode(labels[0])
+            node = TreeNode(label=labels[0])
             return node
 
         if not features_list:
             key, _ = cls.get_max_key_value(res)
-            node = TreeNode(key)
+            node = TreeNode(label=key)
             return node
 
         gain_map = {}
@@ -189,10 +188,10 @@ class DecisionTree(object):
         max_key, max_gain = cls.get_max_key_value(gain_map)
         if max_gain < eps:
             key, _ = cls.get_max_key_value(res)
-            node = TreeNode(key)
+            node = TreeNode(label=key)
             return node
         else:
-            root = TreeNode(max_key)
+            root = TreeNode(feature=max_key)
             values = features_list.pop(max_key)
             values = set(values)
             childs = []

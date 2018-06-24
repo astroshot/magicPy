@@ -19,6 +19,13 @@ class TestTree(TestCase):
         gain1 = tree.gain(A1, result)
         self.assertEqual(gain1, entropy - condition_entropy)
 
+    def test_build_ID3(self):
+        root = tree.DecisionTree.build(self.data_train, eps=0.1)
+        self.assertEqual(root.feature, 'House')
+        self.assertEqual(len(root.childs), 2)
+        self.assertEqual(root.childs[0].childs, None)
+        self.assertEqual(len(root.childs[1].childs), 2)
+
 
 if __name__ == '__main__':
     main()
