@@ -112,7 +112,7 @@ def gain_ratio(features, results):
 
 class TreeNode(object):
     """Decision Tree Node
-    Each node has two branches, one is yes, the other is no.
+    Each node has multi branches.
     """
 
     def __init__(self, feature=None, label=None, root=None, childs=None):
@@ -198,6 +198,7 @@ class DecisionTree(object):
             for value in values:
                 sub_frame = data_train[data_train[max_key].isin([value])]
                 node = cls.build(sub_frame, eps, method)
+                node.root = root
                 childs.append(node)
             root.childs = childs
             return root
