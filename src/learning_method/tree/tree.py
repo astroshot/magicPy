@@ -27,7 +27,7 @@ def calc_probability(result):
 
 
 def calc_entropy(result):
-    """Here result is designed as a dict.
+    """Calculate entropy of result. Here result is returned as a dict.
     For example, result = {'Yes': 0.6, 'No': 0.4}
     :param result:
     :return: float
@@ -88,7 +88,7 @@ def feature_entropy(features, results):
 
 
 def gain(features, results):
-    """
+    """gain used for ID3
     :param features: list
     :param results: list
     :return: float
@@ -100,7 +100,7 @@ def gain(features, results):
 
 
 def gain_ratio(features, results):
-    """
+    """gain ratio used for C4.5
     :param features: list
     :param results: list
     :return: float
@@ -116,6 +116,12 @@ class TreeNode(object):
     """
 
     def __init__(self, feature=None, label=None, root=None, childs=None):
+        """
+        :param feature: feature name
+        :param label: feature label
+        :param root: root of current TreeNode
+        :param childs: list of TreeNode, indicating the childs of a TreeNode
+        """
         self.feature = feature
         self.label = label
         self.root = root  # father node
@@ -135,6 +141,9 @@ class DecisionTreeMethod(object):
 class DecisionTree(object):
 
     def __init__(self, root):
+        """Training data is based on DataFrame in pandas.
+        :param root: TreeNode
+        """
         self.root = root
 
     @classmethod
@@ -205,7 +214,7 @@ class DecisionTree(object):
 
     @classmethod
     def in_order(cls, root):
-        """Visit a decision tree
+        """Visit a decision tree by in_order
         :param root: TreeNode
         :return:
         """
