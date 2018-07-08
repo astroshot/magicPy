@@ -1,7 +1,7 @@
 # coding=utf-8
 
 
-from collections import defaultdict
+from collections import defaultdict, Counter
 import pandas as pd
 
 
@@ -27,3 +27,29 @@ def get_features(data_frame):
         if i < len(columns) - 1:
             features_list[name] = data_frame[data_frame.columns[i]].values.tolist()
     return features_list
+
+
+def calc_probability(result, smooth=False, factor=1):
+    """calculate probability of result
+
+    :param result: list, for example[yes, no, yes, no]
+    :param smooth: boolean, if Laplace smoothing is needed
+    :param factor: smoothing factor, default value is 1
+    :return: dict, for example: {'yes': 0.5, 'no': 0.5}
+    """
+    if smooth:  # Laplace smoothing
+        if not factor:
+            factor = 1
+
+    total = len(result)
+    counter = Counter(result)
+    n = len(counter)
+    
+    if smooth:
+        for key, value in counter.items():
+            counter[key] = (value + factor) / (total + factor * n)
+    else:
+        for key, value in counter.items():
+            counter[key] = value / total
+
+    return counter

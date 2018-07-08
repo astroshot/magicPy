@@ -4,6 +4,7 @@ import pandas as pd
 from unittest import TestCase, main
 import test_init
 from src.learning_method.tree import tree
+from src.util import df
 
 
 class TestTree(TestCase):
@@ -11,7 +12,7 @@ class TestTree(TestCase):
 
     def test_calc_probability(self):
         result = self.data_train['Classification'].values.tolist()
-        res = tree.calc_probability(result)
+        res = df.calc_probability(result)
         self.assertEqual(type(res), dict)
         entropy = tree.calc_entropy(res)
         A1 = self.data_train['Age'].values.tolist()
