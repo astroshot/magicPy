@@ -8,24 +8,6 @@ from src.util.define import MIN_FLOAT, EPS
 import src.util.df as df
 
 
-def calc_probability(result):
-    """calculate probability of result
-
-    :param result: list, for example[yes, no, yes, no]
-    :return: dict, for example: {'yes': 0.5, 'no': 0.5}
-    """
-    res = {}
-    total = len(result)
-    for item in result:
-        if item in res:
-            res[item] += 1
-        else:
-            res[item] = 1
-    for key, value in res.items():
-        res[key] = value / total
-    return res
-
-
 def calc_entropy(result):
     """Calculate entropy of result. Here result is returned as a dict.
     For example, result = {'Yes': 0.6, 'No': 0.4}
@@ -56,7 +38,7 @@ def calc_condition_entropy(features, results):
     entropy = 0.0
     len_value = 0
     for value in condition_map.values():
-        res = calc_probability(value)
+        res = df.calc_probability(value)
         entropy += len(value) / total * calc_entropy(res)
         len_value += len(value)
     if len_value != total:
@@ -93,7 +75,7 @@ def gain(features, results):
     :param results: list
     :return: float
     """
-    res = calc_probability(results)
+    res = df.calc_probability(results)
     entropy = calc_entropy(res)
     condition_entropy = calc_condition_entropy(features, results)
     return entropy - condition_entropy
@@ -176,7 +158,7 @@ class DecisionTree(object):
         """
         result = df.get_results(data_train)
         features_list = df.get_features(data_train)
-        res = calc_probability(result)
+        res = df.calc_probability(result)
 
         gain_method = DecisionTreeMethod.method_map.get(method) or gain
 
