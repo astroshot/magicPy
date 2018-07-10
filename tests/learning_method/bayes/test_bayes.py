@@ -1,7 +1,9 @@
 # coding=utf-8
-import pandas as pd
 from unittest import TestCase, main
-# import test_init
+
+import pandas as pd
+import test_init
+
 from src.learning_method.bayes import bayes
 
 

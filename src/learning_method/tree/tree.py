@@ -3,9 +3,9 @@
 import math
 from collections import defaultdict
 
+import src.util.df as df
 from src.learning_method.tree.exceptions import DataError
 from src.util.define import MIN_FLOAT, EPS
-import src.util.df as df
 
 
 def calc_entropy(result):
