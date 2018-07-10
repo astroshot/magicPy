@@ -79,7 +79,7 @@ class NaiveBayes(object):
         null_list = full_values_set - feature_values_set
         if not null_list:
             return df.calc_probability(values, smooth, factor)
-        
+
         total = len(values)
         counter = Counter(values)
         n = len(full_values_set)
@@ -88,7 +88,6 @@ class NaiveBayes(object):
         for key in null_list:
             counter[key] = factor / (total + factor * n)
         return counter
-        
 
     def build(self, method=Method.MAXIMUM_LIKELIHOOD):
         """Stores bayes propability in dict. for example:
@@ -107,11 +106,26 @@ class NaiveBayes(object):
             sub_frame = data_train[data_train[result_row_name].isin([key])]
             features_map = df.get_features(sub_frame)
             for feature, values in features_map.items():
-                # bayes_model[key][feature] = {}
                 assert type(values) == list
                 feature_res = self.calc_feature_propability(feature, values, smooth)
                 bayes_model[key][feature] = feature_res
-                # for feature_res_key, feature_res_value in feature_res.items():
-                #     bayes_model[key][feature][feature_res_key] = feature_res_value
         self.result = res
         self.model = bayes_model
+
+    def predict(self, data_frame):
+        features = df.get_features(data_frame)
+        columns = df.get_column_names(data_frame)
+        predict_values = {}
+        append_result = []
+
+        for _, row in data_frame.iterrows():
+            for y_value in self.result:
+                p = self.result[y_value]
+                p_features = 1
+                for column in columns:
+                    p_features *= self.model[y_value][column].get(row[column], 0)
+                predict_values[y_value] = p * p_features
+            max_value, max_key = max(zip(predict_values.values(), predict_values.keys()))
+            append_result.append(max_key)
+        data_frame['Result'] = append_result
+        return data_frame
