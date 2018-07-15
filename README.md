@@ -34,3 +34,5 @@ ID3 method and C4.5 method are implemented.
 
 ### Naive Bayes
 Maximum Likelihood and Bayes Method are implemented.
+
+add some text
