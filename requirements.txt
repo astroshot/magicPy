@@ -31,7 +31,6 @@ scipy==1.1.0
 seaborn==0.8.1
 simplegeneric==0.8.1
 six==1.11.0
-sortedmap==0.1.0
 traitlets==4.3.2
 urllib3==1.23
 wcwidth==0.1.7
