@@ -1,29 +1,26 @@
 # coding=utf-8
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot as plt
+from src.learning_method.logistic.logistic import LogisticModel
 
-from unittest import TestCase, main
-
-import os
-import sys
-
-join = os.path.join
-base = os.path.dirname(os.path.abspath(os.path.realpath(__file__)))
-base = os.path.dirname(base)
-sys.path.append(os.getcwd())
-sys.path.append('src/learning_method/logistic')
+data_train = pd.read_csv('src/learning_method/logistic/tests/logistic_test.csv', sep='\t')
 
 
-class TestLogistic(TestCase):
-    data_train = pd.read_csv('src/learning_method/logistic/tests/logistic_test.csv', sep='\t')
-
-    def test_build(self):
-        from src.learning_method.logistic.logistic import LogisticModel
-        features, results = LogisticModel.extract(self.data_train)
-        model = LogisticModel(features, results, 1e-3, 500)
-        model.build()
-        weight = np.array([[0.47911342], [-0.61587567], [4.11858007]])
-        self.assertEqual(weight, model.weight)
+def main():
+    features, results = LogisticModel.extract(data_train)
+    model = LogisticModel(features, results, 1e-3, 500)
+    model.build()
+    # weight = np.array([[0.48007329], [-0.6168482], [4.12414349]])
+    print(model.weight)
+    # plot train data
+    data_array = data_train.values
+    plt.figure()
+    plt.scatter(data_array[:, 0], data_array[:, 1], c=data_array[:, 2], alpha=0.4)
+    x_line = np.linspace(-3, 3, 51)
+    y_line = (-model.weight[2] - model.weight[0] * x_line) / model.weight[1]
+    plt.plot(x_line, y_line)
+    plt.show()
 
 
 if __name__ == '__main__':
