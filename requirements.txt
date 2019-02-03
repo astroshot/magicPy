@@ -8,11 +8,14 @@ cycler
 decorator
 gast
 grpcio
+h5py
 idna
 ipython
 ipython-genutils
 isort
 jedi
+Keras-Applications
+Keras-Preprocessing
 kiwisolver
 lazy-object-proxy
 Markdown
@@ -38,8 +41,10 @@ seaborn
 simplegeneric
 six
 tensorboard
+tensorflow
 termcolor
 traitlets
+typed-ast
 urllib3
 wcwidth
 Werkzeug
