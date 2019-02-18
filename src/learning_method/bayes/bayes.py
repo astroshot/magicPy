@@ -57,7 +57,7 @@ class NaiveBayes(object):
         """Naive Bayes model
         :param data_train: pandas.DataFrame
         :param result: result of data_train
-        :param model: dict of propabilities
+        :param model: dict of probabilities
         """
         self.data_train = data_train
         self.result = result
@@ -90,7 +90,7 @@ class NaiveBayes(object):
         return counter
 
     def build(self, method=Method.MAXIMUM_LIKELIHOOD):
-        """Stores bayes propability in dict. for example:
+        """Stores bayes probability in dict. for example:
 
         """
         data_train = self.data_train
@@ -106,7 +106,7 @@ class NaiveBayes(object):
             sub_frame = data_train[data_train[result_row_name].isin([key])]
             features_map = df.get_features(sub_frame)
             for feature, values in features_map.items():
-                assert type(values) == list
+                assert isinstance(values, list)
                 feature_res = self.calc_feature_propability(feature, values, smooth)
                 bayes_model[key][feature] = feature_res
         self.result = res

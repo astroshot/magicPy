@@ -21,7 +21,7 @@ def get_results(data_frame):
     :return: list of values
     """
     columns = get_column_names(data_frame)
-    return data_frame[data_frame.columns[len(columns)-1]].values.tolist() if columns else []
+    return data_frame[data_frame.columns[len(columns) - 1]].values.tolist() if columns else []
 
 
 def get_features(data_frame):

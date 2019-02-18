@@ -97,17 +97,17 @@ class TreeNode(object):
     Each node has multi branches.
     """
 
-    def __init__(self, feature=None, label=None, root=None, childs=None):
+    def __init__(self, feature=None, label=None, root=None, children=None):
         """
         :param feature: feature name
         :param label: feature label
         :param root: root of current TreeNode
-        :param childs: list of TreeNode, indicating the childs of a TreeNode
+        :param children: list of TreeNode, indicating the children of a TreeNode
         """
         self.feature = feature
         self.label = label
         self.root = root  # father node
-        self.childs = childs  # child TreeNode list
+        self.children = children  # child TreeNode list
 
 
 class DecisionTreeMethod(object):
@@ -185,13 +185,13 @@ class DecisionTree(object):
             root = TreeNode(feature=max_key)
             values = features_list.pop(max_key)
             values = set(values)
-            childs = []
+            children = []
             for value in values:
                 sub_frame = data_train[data_train[max_key].isin([value])]
                 node = cls.build(sub_frame, eps, method)
                 node.root = root
-                childs.append(node)
-            root.childs = childs
+                children.append(node)
+            root.children = children
             return root
 
     @classmethod
