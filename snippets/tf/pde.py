@@ -14,7 +14,7 @@ def DisplayArray(a, fmt='jpeg', rng=[0, 1]):
     a = np.uint8(np.clip(a, 0, 255))
     f = BytesIO()
     PIL.Image.fromarray(a).save(f, fmt)
-    display((Image(data=f.getvalue()),))
+    display((Image(data=f.getvalue()), ))
 
 
 def make_kernel(a):
@@ -33,9 +33,8 @@ def simple_conv(x, k):
 
 def laplace(x):
     """Compute the 2D laplacian of an array"""
-    laplace_k = make_kernel([[0.5, 1.0, 0.5],
-                             [1.0, -6., 1.0],
-                             [0.5, 1.0, 0.5]])
+    laplace_k = make_kernel([[0.5, 1.0, 0.5], [1.0, -6., 1.0], [0.5, 1.0,
+                                                                0.5]])
     return simple_conv(x, laplace_k)
 
 
@@ -70,9 +69,7 @@ def create_pool():
     Ut_ = Ut + eps * (laplace(U) - damping * Ut)
 
     # Operation to update the state
-    step = tf.group(
-        U.assign(U_),
-        Ut.assign(Ut_))
+    step = tf.group(U.assign(U_), Ut.assign(Ut_))
 
     # Initialize state to initial conditions
     with tf.Session().as_default() as sess:
