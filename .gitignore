@@ -104,3 +104,5 @@ ENV/
 # VS Code
 .vscode/
 .idea/
+
+training_checkpoints/*
