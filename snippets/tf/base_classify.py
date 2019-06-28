@@ -12,7 +12,8 @@ import matplotlib.pyplot as plt
 
 def classify_example():
     fashion_mnist = keras.datasets.fashion_mnist
-    (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
+    (train_images, train_labels), (test_images,
+                                   test_labels) = fashion_mnist.load_data()
     plt.figure()
     plt.imshow(train_images[0])
     plt.colorbar()
